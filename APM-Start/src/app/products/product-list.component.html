@@ -4,13 +4,13 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-md-2">Filter by:</div>
-      <div class="col-md-4">
+      <div class="col-md-2 text-left">Filter by:</div>
+      <div class="col-md-4 text-left">
         <input type="text" [(ngModel)] = 'listFilter' >
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 text-left">
         <h4>Filtered by: {{listFilter}}</h4>
       </div>
     </div>
@@ -46,7 +46,7 @@
             <td>{{product.releaseDate}}</td>
             <td>{{product.price | currency: 'BRL' : 'symbol' : '1.2-2'}}</td>
             <td>
-              <pm-star></pm-star>
+              <pm-star [rating] = 'product.starRating'></pm-star>
             </td>
           </tr>
         </tbody>
