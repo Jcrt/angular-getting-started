@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { ProductService } from '../services/product.service';
-import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'pm-products',
@@ -29,6 +28,7 @@ export class ProductListComponent implements OnInit {
 
   _listFilter: string;
 
+  errorMessage: '';
   pageTitle = 'Product List';
   imageWidth: number;
   imageMargin: number;
@@ -47,7 +47,14 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe({
+      next: products => this.setProducts(products),
+      error: err => this.errorMessage = err
+    });
+  }
+
+  setProducts(products: IProduct[]) {
+    this.products = products;
     this.filteredProducts = this.products;
   }
 
