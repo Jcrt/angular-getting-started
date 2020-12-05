@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../services/product.service';
-import { IProduct } from './product';
+import { ProductService } from '../../services/product.service';
+import { IProduct } from '../product';
 
 @Component({
   templateUrl: './product-detail.component.html',
@@ -10,11 +11,12 @@ import { IProduct } from './product';
 export class ProductDetailComponent implements OnInit {
   _id: number;
 
-  pageTitle: 'Product Detail';
+  pageTitle = 'Product Detail: ';
   product: IProduct;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService
   ) { }
 
@@ -24,6 +26,21 @@ export class ProductDetailComponent implements OnInit {
       or using some shorthands, as plus sign before value to cast it to number.
     */
     this._id = +this.route.snapshot.queryParamMap.get('id');
+    this.product = {
+      "productId": 1,
+      "productName": "Leaf Rake",
+      "productCode": "GDN-0011",
+      "releaseDate": "March 19, 2019",
+      "description": "Leaf rake with 48-inch wooden handle.",
+      "price": 19.95,
+      "starRating": 3.2,
+      "imageUrl": "assets/images/leaf_rake.png"
+    };
+
+    this.pageTitle += `${this._id}`;
   }
 
+  onBack(): void {
+    this.router.navigate(['/products']);
+  }
 }

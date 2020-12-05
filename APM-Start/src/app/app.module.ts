@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { ConvertToSpacePipe } from './shared/pipes/convert-to-space.pipe';
 import { StarComponent } from './shared/star/star.component';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
-import { ProductDetailComponent } from './products/product-detail.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
