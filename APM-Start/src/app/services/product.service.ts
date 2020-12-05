@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../products/product';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, onErrorResumeNext, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -14,6 +14,7 @@ export class ProductService {
 
   }
 
+  // tslint:disable-next-line: typedef
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
@@ -32,5 +33,14 @@ export class ProductService {
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );
+  }
+
+  getProductById(id: number): IProduct {
+    let product: IProduct;
+    this.getProducts().subscribe({
+      next: x => product = x.find(y => y.productId === id),
+      error: err => new Error(`Product is not found: ${err}`)
+    });
+    return product;
   }
 }

@@ -53,7 +53,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  setProducts(products: IProduct[]) {
+  setProducts(products: IProduct[]): void {
     this.products = products;
     this.filteredProducts = this.products;
   }
